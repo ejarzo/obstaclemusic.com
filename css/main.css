@@ -2,10 +2,30 @@ html {
   color: #222;
   font-size: 1em;
   line-height: 1.4;
+  background: #000;
+  font-family: serif;
+}
+
+a {
+  color: #000;
+}
+
+a:hover {
+  font-style: italic;
 }
 
 body {
-  padding: 20px 50px;
+  color: #fff;
+  font-size: 3em;
+}
+
+.main {
+  position: absolute;
+  padding: 40px 80px;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 ::-moz-selection {
@@ -17,4 +37,3 @@ body {
   background: #ddd;
   text-shadow: none;
 }
-
