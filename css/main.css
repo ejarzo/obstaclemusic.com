@@ -1,5 +1,9 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
-  color: #222;
+  color: #fff;
   font-size: 1em;
   line-height: 1.4;
   background: #000;
@@ -7,7 +11,7 @@ html {
 }
 
 a {
-  color: #000;
+  color: #fff;
 }
 
 a:hover {
@@ -28,6 +32,14 @@ body {
   width: 100%;
 }
 
+.spotify-follow {
+  margin-top: 15px;
+  background: #fff;
+  padding-top: 10px;
+  padding-left: 10px;
+  display: inline-block;
+}
+
 ::-moz-selection {
   background: #ddd;
   text-shadow: none;
@@ -36,4 +48,10 @@ body {
 ::selection {
   background: #ddd;
   text-shadow: none;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    font-size: 1.5em;
+  }
 }
