@@ -1,5 +1,7 @@
 let img;
 const vScale = 1;
+const IMAGE_PATH = '../assets/subset-ep-cover-5-compressed-2.jpg';
+const BACKGROUND_PATH = '../assets/subset-ep-cover-background.jpg';
 
 const toRight = true;
 let directionX = 1;
@@ -7,6 +9,10 @@ let directionY = 1;
 const particles = [];
 let increaseSize = true;
 let increaseOpacity = true;
+let count = 0;
+let mouseDiffX = 0;
+let mouseDiffY = 0;
+let sinCount = 0;
 
 const dist = (x1, y1, x2, y2) => {
   const a = x1 - x2;
@@ -15,106 +21,98 @@ const dist = (x1, y1, x2, y2) => {
 };
 
 function Particle(x, y) {
+  this.initX = x;
+  this.initY = y;
   this.x = x;
   this.y = y;
-  this.r = 8;
+  this.r = 2;
   this.opacity = 1;
   this.deltaX = 0;
   this.deltaY = 0;
 
   this.update = function() {
-    this.x += 1;
-    this.y += 1;
-    this.x = constrain(this.x, 0, width);
-    this.y = constrain(this.y, 0, height);
+    // this.x += 1;
+    const rand = random(200);
+    // if (rand > 1) {
+    //   this.y *= 1.001;
+    // } else {
+    //   this.y /= 1.001;
+    // }
+    // this.y += (mouseY - height) / height;
+    // this.x += mouseX / width;
+
+    // this.x = constrain(this.x, 0, width);
+    // this.y = constrain(this.y, 0, height);
+    // this.r += 1;
+    this.opacity = rand;
   };
 
   this.show = function() {
     noStroke();
     const px = floor(this.x / vScale);
     const py = floor(this.y / vScale);
-    if (dist(px, py, mouseX, mouseY) < 200) {
-      const col = img.get(px, py);
-      if (col[0] > 20 || col[1] > 50 || col[2] > 60) {
-        fill(
-          col[0] + this.deltaY / 20,
-          col[1] + this.deltaY / 20,
-          col[2] + this.deltaY / 20,
-          this.opacity / (dist(mouseX, mouseY, px, py) / 100)
-        );
-
-        // if (this.deltaY % 10) {
-        //   if (increaseOpacity) {
-        //     increaseOpacity = false;
-        //   } else {
-        //     increaseOpacity = true;
-        //   }
-        // }
-        // if (increaseSize) {
-        //   // this.r += 0.2;
-        // } else {
-        //   // this.r -= 0.2;
-        // }
-        rect(
-          this.x + (this.deltaX * this.deltaX) / 200,
-          this.y + Math.sin(this.deltaY / 500),
-          this.r * random(20),
-          this.r
-        );
-        // this.opacity++;
-        this.deltaX *= this.deltaX * Math.sin(this.deltaY);
-        this.deltaY += directionY;
-      }
+    const [r, g, b, a] = img.get(px, py);
+    if (r > 10 && g > 10 && b > 10) {
+      fill(r, g + this.deltaY, b, this.opacity);
+      ellipse(this.x, this.y, this.r, this.r + random(2));
     }
+    if (g > 150) {
+      if (g > 200) {
+        this.x += mouseDiffX * 10;
+        this.y += mouseDiffY * 10;
+      } else {
+        this.x += mouseDiffX * 3;
+        this.y += mouseDiffY * 3;
+      }
+    } else if (b > 150) {
+      // this.y += 1;
+      this.r = sinCount * 5;
+    }
+    if (r > 150 && b < 220 && g < 120) {
+      this.r = sinCount * 8;
+    }
+
+    // this.opacity++;
+    this.deltaX *= this.deltaX + mouseX;
+    this.deltaY *= directionY;
+    // const rand = random(200);
+    this.opacity = random(200);
   };
 }
 
 function preload() {
-  img = loadImage('../assets/unknown_number_cover.jpg');
+  img = loadImage(IMAGE_PATH);
+  // backgroundImg = loadImage(BACKGROUND_PATH);
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   img.loadPixels();
   noStroke();
-  pixelDensity(0.5);
-  for (var i = 0; i < 5000; i++) {
+  pixelDensity(1);
+  for (var i = 0; i < 4000; i++) {
     particles[i] = new Particle(random(width), random(height));
   }
-  background(51);
-  image(img, 0, 0);
-  img.loadPixels();
+  // image(backgroundImg, 0, -100);
 }
 
-let count = 0;
 function draw() {
-  if (count >= 100) {
-    for (var i = 0; i < 5000; i++) {
-      particles[i] = new Particle(random(width), random(height));
-    }
-    count = 0;
-  }
+  background(0, 20, 59, 80);
+  sinCount = Math.sin(count / 20);
   for (var i = 0; i < particles.length; i++) {
-    particles[i].update();
+    // particles[i].update();
     particles[i].show();
   }
   count++;
 }
 
-// function mouseMoved() {
-//   directionX = mouseX;
-//   directionY = mouseY;
-// }
-
-function mousePressed() {
-  directionX = random(-5, 5);
-  directionY = random(-5, 5);
-  for (var i = 0; i < 5000; i++) {
-    particles[i] = new Particle(random(width), random(height));
-  }
+function mouseMoved() {
+  mouseDiffX = (mouseX / width - 0.5) * -1;
+  mouseDiffY = (mouseY / height - 0.5) * -1;
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  image(img, 0, 0);
+function mousePressed() {
+  for (let i = 0; i < 4000; i++) {
+    particles[i] = new Particle(random(width), random(height));
+  }
 }
