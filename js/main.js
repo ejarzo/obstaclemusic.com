@@ -2,6 +2,7 @@ let img;
 const vScale = 1;
 const IMAGE_PATH = '../assets/subset-ep-cover-5-compressed-2.jpg';
 const BACKGROUND_PATH = '../assets/subset-ep-cover-background.jpg';
+const PARTICLE_COUNT = 3000;
 
 const toRight = true;
 let directionX = 1;
@@ -90,7 +91,7 @@ function setup() {
   img.loadPixels();
   noStroke();
   pixelDensity(1);
-  for (var i = 0; i < 4000; i++) {
+  for (var i = 0; i < PARTICLE_COUNT; i++) {
     particles[i] = new Particle(random(width), random(height));
   }
   // image(backgroundImg, 0, -100);
@@ -112,7 +113,7 @@ function mouseMoved() {
 }
 
 function mousePressed() {
-  for (let i = 0; i < 4000; i++) {
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
     particles[i] = new Particle(random(width), random(height));
   }
 }
