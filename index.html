@@ -19,6 +19,28 @@
   </head>
 
   <body>
+    <svg>
+      <filter id="noise" y="-50%" x="-50%" width="200%" height="200%">
+        <feTurbulence baseFrequency="0.01 0.1" result="NOISE" numOctaves="1">
+          <animate
+            attributeName="baseFrequency"
+            from="0"
+            to="0.02 0.2"
+            dur="20s"
+            repeatCount="indefinite"
+          />
+        </feTurbulence>
+
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="NOISE"
+          scale="20"
+          xChannelSelector="R"
+          yChannelSelector="R"
+        ></feDisplacementMap>
+      </filter>
+    </svg>
+
     <div class="main">
       <div class="title">
         <h1>Obstacle</h1>

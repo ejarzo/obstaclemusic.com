@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Obstacle</title>
+    <meta name="description" content="Obstacle Music - Brooklyn NY" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+
+  <body>
+    <svg>
+      <filter id="noise" y="-50%" x="-50%" width="200%" height="200%">
+        <feTurbulence
+          baseFrequency="0.5 0.002"
+          numOctaves="10"
+          seed="20"
+        ></feTurbulence>
+
+        <feDisplacementMap
+          in="SourceGraphic"
+          in2="NOISE"
+          scale="15"
+          xChannelSelector="R"
+          yChannelSelector="R"
+        ></feDisplacementMap>
+      </filter>
+    </svg>
+
+    <div class="main border">
+      <div>
+        <div class="title">
+          <h1>Obstacle</h1>
+          <img src="assets/obstacle-text-logo.svg" />
+        </div>
+        <h2 class="noise">
+          Bliss Point
+        </h2>
+        <h2 class="noise">
+          Laugh
+        </h2>
+        <h2 class="noise">
+          Jim Coltson
+        </h2>
+      </div>
+      <div class="divider" />
+      <div class="info-box">
+        <h3 class="">SUBSET EP RELEASE PARTY</h3>
+        <h2 class="">SEPT 13 | 11PM | $5</h2>
+        <h2 class="">GOLD SOUNDS</h2>
+        <h4 class="">44 Wilson Ave. Brooklyn</h4>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

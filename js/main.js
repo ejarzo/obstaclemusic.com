@@ -26,14 +26,15 @@ function Particle(x, y) {
   this.initY = y;
   this.x = x;
   this.y = y;
-  this.r = 2;
-  this.opacity = 1;
+  this.r = 20;
+  this.opacity = random(100);
+
   this.deltaX = 0;
   this.deltaY = 0;
 
   this.update = function() {
     // this.x += 1;
-    const rand = random(200);
+    const rand = random(100);
     // if (rand > 1) {
     //   this.y *= 1.001;
     // } else {
@@ -55,7 +56,7 @@ function Particle(x, y) {
     const [r, g, b, a] = img.get(px, py);
     if (r > 10 && g > 10 && b > 10) {
       fill(r, g + this.deltaY, b, this.opacity);
-      ellipse(this.x, this.y, this.r, this.r + random(2));
+      rect(this.x, this.y, this.r, this.r * 2);
     }
     if (g > 150) {
       if (g > 200) {
@@ -77,13 +78,13 @@ function Particle(x, y) {
     this.deltaX *= this.deltaX + mouseX;
     this.deltaY *= directionY;
     // const rand = random(200);
-    this.opacity = random(200);
+    this.opacity = random(100);
   };
 }
 
 function preload() {
   img = loadImage(IMAGE_PATH);
-  // backgroundImg = loadImage(BACKGROUND_PATH);
+  backgroundImg = loadImage(BACKGROUND_PATH);
 }
 
 function setup() {
@@ -94,23 +95,28 @@ function setup() {
   for (var i = 0; i < PARTICLE_COUNT; i++) {
     particles[i] = new Particle(random(width), random(height));
   }
-  // image(backgroundImg, 0, -100);
-}
-
-function draw() {
-  background(0, 20, 59, 80);
-  sinCount = Math.sin(count / 20);
+  image(backgroundImg, 0, -100);
+  background(0, 20, 59, 200);
   for (var i = 0; i < particles.length; i++) {
     // particles[i].update();
     particles[i].show();
   }
-  count++;
 }
 
-function mouseMoved() {
-  mouseDiffX = (mouseX / width - 0.5) * -1;
-  mouseDiffY = (mouseY / height - 0.5) * -1;
+function draw() {
+  // background(0, 20, 59, 80);
+  // sinCount = Math.sin(count / 20);
+  // for (var i = 0; i < particles.length; i++) {
+  //   // particles[i].update();
+  //   particles[i].show();
+  // }
+  // count++;
 }
+
+// function mouseMoved() {
+//   mouseDiffX = (mouseX / width - 0.5) * -1;
+//   mouseDiffY = (mouseY / height - 0.5) * -1;
+// }
 
 function mousePressed() {
   for (let i = 0; i < PARTICLE_COUNT; i++) {

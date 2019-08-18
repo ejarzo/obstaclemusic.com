@@ -2,6 +2,16 @@
   box-sizing: border-box;
 }
 
+.noise {
+  margin-top: 10px;
+  filter: url('#noise'); /* drop-shadow(-2px 2px 10px rgba(1, 120, 255, 0.9));*/
+  margin-bottom: 25px;
+}
+
+.info {
+  filter: url('#noise'); /* drop-shadow(-2px 2px 20px rgba(255, 255, 255, 0.9));*/
+}
+
 html {
   font-family: 'Inconsolata';
   color: #000;
@@ -12,15 +22,22 @@ html {
   text-align: center;
 }
 
+/*.divider {
+  height: 2px;
+  background: #fff;
+  margin-bottom: 100px;
+  margin-top: 15px;
+}*/
+
 .title img {
-  -webkit-filter: drop-shadow(-2px 2px 10px rgba(245, 10, 80, 0.9));
-  filter: drop-shadow(-2px 2px 10px rgba(245, 10, 80, 0.9));
+  filter: url('#noise'); /*drop-shadow(-2px 2px 10px rgba(245, 10, 80, 0.9))*/
   max-width: 500px;
   width: 100%;
 }
 
 .title h1 {
   position: absolute;
+
   top: -9999px;
   left: -9999px;
 }
@@ -35,8 +52,10 @@ a {
 
 a:hover {
   /*font-style: italic;*/
-  -webkit-filter: drop-shadow(-1px 1px 5px rgba(245, 10, 80, 1));
-  filter: drop-shadow(-1px 1px 5px rgba(245, 10, 80, 1));
+  /*-webkit-filter: drop-shadow(-1px 1px 5px rgba(245, 10, 80, 1));*/
+  /*filter: drop-shadow(-1px 1px 5px rgba(245, 10, 80, 1));*/
+  filter: url('#noise');
+  -webkit-filter: url('#noise');
 }
 
 body {
@@ -44,15 +63,28 @@ body {
 }
 
 .main {
-  mix-blend-mode: exclusion;
+  /*mix-blend-mode: exclusion;*/
   position: absolute;
-  padding: 40px 80px;
+  /*padding: 20px;*/
   z-index: 1;
   top: 0;
   left: 0;
+  right: 0;
   width: 100%;
+  width: 720px;
+  height: 720px;
+  padding-top: 40px;
+  /*border: 1px solid rgba(255, 0, 80, 0.4);*/
+  margin: 0px auto;
   color: #fff;
 }
+
+/*.border {
+  width: 700px;
+  height: 700px;
+  margin: 20px auto;
+  border: 2px solid #fff;
+}*/
 
 h3 {
   font-weight: normal;
@@ -78,10 +110,57 @@ h3 {
   text-shadow: none;
 }
 
+.info-box {
+  margin-top: 45px;
+  /*border-top: 2px solid rgba(255, 0, 80, 0.9);*/
+  padding-top: 25px;
+  height: 500px;
+  position: relative;
+  z-index: 20;
+  /*mix-blend-mode: difference ;*/
+  box-shadow: 0 0 800px rgba(255, 0, 80, 0.4);
+  /*background: rgba(0, 0, 0, 0.9);*/
+  background: white;
+}
+
+.info-box h3 {
+  color: black;
+  font-weight: bold;
+  filter: url('#noise') drop-shadow(-2px 2px 15px rgba(255, 0, 80, 1));
+}
+
+h2 {
+  font-size: 1em;
+}
+
+.left {
+  float: left;
+  text-align: left;
+}
+
+.right {
+  float: right;
+  text-align: right;
+}
+
+.info-box h2 {
+  color: black;
+
+  font-size: 0.7em;
+}
+
+.info-box h4 {
+  font-size: 0.4em;
+}
+
 canvas {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 0;
+  mix-blend-mode: difference;
+
+  /*filter: blur(10px)*/
 }
 
 @media screen and (max-width: 500px) {
