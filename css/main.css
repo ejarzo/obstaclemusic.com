@@ -62,7 +62,14 @@ body {
   font-size: 3em;
 }
 
-.main {
+.dg.ac {
+  position: absolute !important;
+  background: white !important;
+  z-index: 200 !important;
+}
+
+.main-content {
+  display: none;
   /*mix-blend-mode: exclusion;*/
   position: absolute;
   /*padding: 20px;*/
